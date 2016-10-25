@@ -48,15 +48,54 @@ class LoginViewController: UIViewController, UIScrollViewDelegate {
     }
     
     
-    @IBAction func didPressLogin(_ sender: AnyObject) {
+    @IBAction func didPressSignIn(_ sender: AnyObject) {
+        print("inside did Press Sign In!")
         
-        
-        
-        
-        
+        if emailField.text == "doris@me.com" && passwordField.text == "qwerty" {
+            
+            activityIndicator.startAnimating()
+            delay(1, closure: {
+                self.activityIndicator.stopAnimating()
+                self.performSegue(withIdentifier: "loginSegue", sender: nil)
+            })
+            
+            
+            
+            
+        } else if emailField.text!.isEmpty || passwordField.text!.isEmpty {
+            
+            delay(0.1, closure: {
+                
+                let alertController = UIAlertController(title: "Email Required", message: "Please enter your email address", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction) in
+                })
+                
+                alertController.addAction(okAction)
+                self.present(alertController, animated: true, completion: nil);
+                
+            })
+            
+        } else {
+            
+            activityIndicator.startAnimating()
+            delay(1, closure: {
+                
+                self.activityIndicator.stopAnimating()
+                let alertController = UIAlertController(title: "Invalid Email or Password", message: "Please enter correct Email and/or Password", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction) in
+                })
+                
+                alertController.addAction(okAction)
+                self.present(alertController, animated: true, completion: nil);
+                
+            })
+            
+        }
+    
+    
     }
     
-    
+
     
 
 }
